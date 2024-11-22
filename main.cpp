@@ -24,13 +24,13 @@ void insertionSort(std::vector<int>& arr);
 void heapSort(std::vector<int>& arr);
 void mergeSort(std::vector<int>& arr, int l, int r);
 void quickSort(std::vector<int>& arr, int low, int high);
-void generateRandomArray(std::vector<int>& arr, int n);
+void ArrayGenerate(std::vector<int>& arr, int n);
 
 int main() {
     std::vector<int> sizes = {128, 1024};
     for (int size : sizes) {
         std::vector<int> arr(size);
-        generateRandomArray(arr, size);
+        ArrayGenerate(arr, size);
 
         std::vector<int> arrCopy = arr;
         resetCounters();
@@ -190,14 +190,14 @@ void quickSort(std::vector<int>& arr, int low, int high) {
         quickSort(arr, pi + 1, high);
     }
 }
-void generateRandomArray(std::vector<int>& arr, int n) {
+void ArrayGenerate(std::vector<int>& arr, int n) {
     srand(static_cast<unsigned int>(time(0))); //seed for random number generation
     for (int& i : arr) {
         i = rand() % 1000; //generates random numbers between 0 and 999
     }
 }
 void generateAlmostSortedArray(std::vector<int>& arr, int n) {
-    generateRandomArray(arr, n); 
+    ArrayGenerate(arr, n); 
     std::sort(arr.begin(), arr.end()); 
     //randomness to about 10% of the elements
     for (int i = 0; i < n / 10; i++) {
@@ -211,7 +211,7 @@ void generateAlmostReversedArray(std::vector<int>& arr, int n) {
 }
 void generateSortedExceptLastTenPercent(std::vector<int>& arr, int n) {
     int sortUpTo = n - n / 10;
-    generateRandomArray(arr, sortUpTo); //randomize the first part
+    ArrayGenerate(arr, sortUpTo); //randomize the first part
     std::sort(arr.begin(), arr.begin() + sortUpTo); //sorts only the first 90%
     // and the last 10% remains random
 }
